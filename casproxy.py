@@ -1,4 +1,4 @@
-from flask import Flask, redirect, request, jsonify
+from flask import Flask, redirect, request, jsonify, render_template
 import requests
 from xml.etree import ElementTree
 import pypinyin
@@ -137,10 +137,18 @@ def callback():
     user = tree.find(".//{http://www.yale.edu/tp/cas}user").text
     attributes = tree.find(".//{http://www.yale.edu/tp/cas}attributes")
     sid = attributes.find("{http://www.yale.edu/tp/cas}sid").text
-    email = attributes.find("{http://www.yale.edu/tp/cas}email").text
     # if email is empty and sid starts with 1, then it's a student, use sid@mail.sustech.edu.cn as email
-    if not email and sid.startswith("1"):
-        email = sid + "@mail.sustech.edu.cn"
+    email_element = attributes.find("{http://www.yale.edu/tp/cas}email")
+    email = email_element.text if email_element is not None else None
+    if not email:
+        if sid.startswith("1"):
+            print("gen email from sid", sid)
+            email = sid + "@mail.sustech.edu.cn"
+        else:
+            #return "Error: Your SUSTech Email has not set, please set email in https://cas.sustech.edu.cn/cas/edit/email"
+            return render_template('error-cas-email-not-found.html')
+    else:
+        email = attributes.find("{http://www.yale.edu/tp/cas}email").text
     name = attributes.find("{http://www.yale.edu/tp/cas}name").text
 
     first_name, last_name = split_name(name)

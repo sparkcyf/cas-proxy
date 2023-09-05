@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Error Page</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error: Your SUSTech Email has not set</h4>
+        <p>Please bind your SUSTech Email to proceed. Click the button below to set your email.</p>
+        <p>您的cas账户可能尚未绑定南科大的学校邮箱，请点击下面的按钮前往cas进行设置。</p>
+        <hr>
+        <div class="mb-0">
+          <a href="https://cas.sustech.edu.cn/cas/edit/email" class="btn btn-danger">Set Email (https://cas.sustech.edu.cn/cas/edit/email)</a>
+        </div>
+        <div class="mt-4 text-center">
+          <img src="{{ url_for('static', filename='set-email.png') }}" alt="Set Email Image" class="img-fluid" style="max-width: 90%;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/bootstrap/5.3.1/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
